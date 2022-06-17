@@ -13,10 +13,12 @@ class shopeeCrawl:
 
     def __init__(self, url):
         self.url = url
-        self.driver = uc.Chrome(options=self.options)
 
     def get_shopee(self):
         try:
+            option = webdriver.ChromeOptions()
+            option.add_argument("--headless")
+            self.driver = uc.Chrome(options=option)
             self.driver.get('https://shopee.co.id/'+self.url)
             time.sleep(self.interval)
             self.driver.execute_script('window.scrollTo(0, 1500);')
@@ -25,7 +27,7 @@ class shopeeCrawl:
             html = BeautifulSoup(self.driver.page_source, 'html.parser')
 
             # get title
-            title = html.find('title').string
+            title = self.driver.title
 
             return {'title': title}
 
