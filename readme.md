@@ -22,5 +22,5 @@
     ```
 4. run apps
     ```bash
-    python app.py
+    flask run
     ```
